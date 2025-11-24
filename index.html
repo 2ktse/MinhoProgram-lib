@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minho AI Predictor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --orange: #ff7a00;
+      --green: #0cb86a;
+      --blue: #1b57f2;
+      --bg: #0d1117;
+      --card: #1a2336;
+      --muted: #9aa4b2;
+      --text: #e9edf3;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, Segoe UI, Roboto, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      background: var(--card);
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+      padding: 28px 24px;
+      width: min(440px, 100%);
+      animation: fadeInUp 1s ease;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .flag { width: 64px; display: block; margin: 0 auto 10px; }
+
+    h1 {
+      text-align: center;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--green);
+      margin-bottom: 8px;
+      text-shadow: 0 0 12px rgba(12,184,106,0.6);
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .badges {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .badge {
+      font-size: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin: 14px 0 6px;
+    }
+
+    .games {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .game {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      background: #1a2336;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .game:hover {
+      transform: scale(1.03);
+      border-color: var(--green);
+    }
+
+    .input {
+      width: 100%;
+      padding: 12px 14px;
+      border: none;
+      border-radius: 12px;
+      background: #1a2336;
+      color: white;
+      margin-top: 6px;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .warning {
+      display: none;
+      color: var(--orange);
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      margin-top: 18px;
+      font-weight: 700;
+      font-size: 16px;
+      color: #000;
+      background: linear-gradient(90deg, var(--orange), var(--green));
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .progress {
+      display: none;
+      margin-top: 14px;
+      height: 10px;
+      background: #1a2336;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--green), var(--blue));
+      width: 0;
+      animation: fill 2.4s linear forwards;
+    }
+    @keyframes fill {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    #online {
+      color: var(--green);
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 14px;
+    }
+    .footer strong { color: white; }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <img src="https://flagcdn.com/w320/my.png" alt="Malaysia Flag" class="flag">
+
+    <h1>Minho AI Predictor</h1>
+    <div class="subtitle">Fast Predictions • MYR • Malaysia Edition</div>
+
+    <div class="badges">
+      <div class="badge">🔒 Secure</div>
+      <div class="badge">⚡ Smart AI</div>
+      <div class="badge">🇲🇾 Malaysia</div>
+    </div>
+
+    <label>Select your game</label>
+    <div class="games">
+      <label class="game"><input type="radio" name="game" checked> 🍎 Apple of Fortune</label>
+      <label class="game"><input type="radio" name="game"> ✈️ Aviator</label>
+      <label class="game"><input type="radio" name="game"> 💣 Mines</label>
+      <label class="game"><input type="radio" name="game"> 🐔 Chicken Road</label>
+      <label class="game"><input type="radio" name="game"> ⚽ Penalty</label>
+    </div>
+
+    <label for="account">1xBet Account ID</label>
+    <input type="text" id="account" class="input" placeholder="Example: 1234567890" maxlength="10" inputmode="numeric">
+    <div class="hint">Please enter a 10-digit valid ID</div>
+    <div class="warning" id="warning">Please enter a valid 10-digit ID</div>
+
+    <button class="btn" id="start" disabled>Start</button>
+
+    <div class="progress" id="progress">
+      <div class="bar"></div>
+    </div>
+
+    <div class="meta">
+      <div>🟢 Online: <span id="online">148</span></div>
+      <div>⏳ Access closes in <span id="countdown">05:00</span></div>
+    </div>
+
+    <div class="footer">Made by <strong>MinhoDev</strong> • Malaysia</div>
+  </div>
+
+  <script>
+    let t = 300;
+    const cd = document.getElementById("countdown");
+    setInterval(() => {
+      if (t > 0) t--;
+      const m = String(Math.floor(t / 60)).padStart(2, "0");
+      const s = String(t % 60).padStart(2, "0");
+      cd.textContent = `${m}:${s}`;
+    }, 1000);
+
+    const online = document.getElementById("online");
+    setInterval(() => {
+      const base = 145;
+      const jitter = Math.floor(Math.random() * 8) - 3;
+      online.textContent = base + jitter;
+    }, 2500);
+
+    const account = document.getElementById("account");
+    const start = document.getElementById("start");
+    const warning = document.getElementById("warning");
+    const progress = document.getElementById("progress");
+
+    account.addEventListener("input", () => {
+      const valid = /^\d{10}$/.test(account.value);
+      start.disabled = !valid;
+      warning.style.display = valid ? "none" : "block";
+    });
+
+    start.addEventListener("click", () => {
+      progress.style.display = "block";
+      const bar = progress.querySelector(".bar");
+      bar.style.animation = "none";
+      bar.offsetHeight;
+      bar.style.animation = "fill 2.4s linear forwards";
+
+      setTimeout(() => {
+        alert("❌ Deposit of 30 MYR not found. Please make a deposit to continue.");
+      }, 2400);
+    });
+  </script>
+</body>
+</html>
